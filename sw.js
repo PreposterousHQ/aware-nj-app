@@ -1,7 +1,5 @@
-const CACHE = 'aware-nj-v2';
+const CACHE = 'aware-nj-v3';
 const ASSETS = [
-  './',
-  './index.html',
   './manifest.json',
   './icons/logo.png',
   './icons/icon-192.png',
