@@ -1,902 +1,767 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#07111F" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="AWARE NJ" />
-  <meta name="description" content="A.W.A.R.E. New Jersey — Spiritual Emergency First Responder Reference" />
-  <title>A.W.A.R.E. NJ</title>
-  <link rel="manifest" href="manifest.json" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>A.W.A.R.E. New Jersey — Are We Aware of Religious Experiences?</title>
+<meta name="description" content="A.W.A.R.E. NJ gives first responders a framework to recognize and respond to spiritual emergencies in the field — preventing wrongful hospitalization, trauma, and tragedy." />
+<meta property="og:title" content="A.W.A.R.E. New Jersey" />
+<meta property="og:description" content="The first tool that helps first responders recognize a spiritual emergency — before it becomes a tragedy." />
 
-  <!-- =====================================================
-       LOGO PLACEHOLDER INSTRUCTIONS FOR CLAUDE CODE:
-       Replace the SVG placeholder below with:
-       <link rel="apple-touch-icon" href="icons/icon-192.png" />
-       And place the AWARE logo PNG at public/icons/icon-192.png
-       and public/icons/icon-512.png
-       ===================================================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Sohne:wght@400;500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#07111F;
+    --bg2:#0B1828;
+    --surface:#0F1E30;
+    --surface2:#15293f;
+    --line:rgba(255,255,255,0.09);
+    --line2:rgba(255,255,255,0.14);
+    --ink:#F4F7FB;
+    --ink2:#C2D0E0;
+    --ink3:#8497AC;
+    --ink4:#5A6E84;
+    --blue:#7FC0F2;
+    --blue-deep:#4B92CB;
+    --red:#E8645C;
+    --amber:#F2B463;
+    --green:#7FD8A4;
+    --gold:#E9C893;
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Archivo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --maxw:1180px;
+  }
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    overflow-x:hidden;
+    font-size:17px;
+  }
+  ::selection{background:var(--gold);color:var(--bg)}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
 
-    :root {
-      --bg: #07111F;
-      --surface: #0F1E30;
-      --surface2: #142438;
-      --border: rgba(255,255,255,0.07);
-      --text: #FFFFFF;
-      --text2: #CBD5E0;
-      --text3: #4A5568;
-      --text4: #2D3748;
-      --blue: #63B3ED;
-      --red: #E53E3E;
-      --amber: #F59E0B;
-      --green: #68D391;
-      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    }
+  /* ── grain + atmosphere ── */
+  body::before{
+    content:'';
+    position:fixed;inset:0;
+    pointer-events:none;z-index:1;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay;
+  }
 
-    html, body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font);
-      height: 100vh;
-      height: 100dvh;
-      overflow: hidden;
-    }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:2}
 
-    /* ─── APP SHELL ─── */
-    #app {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      max-width: 430px;
-      margin: 0 auto;
-      position: relative;
-      overflow: hidden;
-    }
+  /* ── nav ── */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;
+    backdrop-filter:blur(14px);
+    background:rgba(7,17,31,0.55);
+    border-bottom:1px solid transparent;
+    transition:background .3s,border-color .3s,padding .3s;
+  }
+  nav.scrolled{background:rgba(7,17,31,0.9);border-bottom-color:var(--line);padding:11px 28px}
+  .nav-brand{display:flex;align-items:center;gap:11px;font-family:var(--serif);font-weight:500;letter-spacing:.04em;font-size:18px}
+  .nav-brand img{width:34px;height:34px;border-radius:50%}
+  .nav-brand b{font-weight:600;letter-spacing:.14em}
+  .nav-links{display:flex;align-items:center;gap:30px;font-size:14px;letter-spacing:.02em;color:var(--ink2)}
+  .nav-links a{transition:color .2s}
+  .nav-links a:hover{color:var(--blue)}
+  .nav-cta{
+    border:1px solid var(--line2);border-radius:100px;
+    padding:9px 19px;font-size:13.5px;font-weight:500;letter-spacing:.03em;
+    color:var(--ink);transition:all .25s;
+  }
+  .nav-cta:hover{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+  @media(max-width:820px){.nav-links a:not(.nav-cta){display:none}}
 
-    /* ─── STATUS BAR SPACER ─── */
-    .status-bar {
-      height: env(safe-area-inset-top, 0);
-      background: var(--bg);
-      flex-shrink: 0;
-    }
+  /* ── hero ── */
+  header.hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:140px 0 90px;
+    overflow:hidden;
+  }
+  .hero-glow{
+    position:absolute;z-index:0;
+    width:1100px;height:1100px;
+    top:-340px;right:-340px;
+    background:radial-gradient(circle, rgba(75,146,203,0.20) 0%, rgba(75,146,203,0.06) 38%, transparent 66%);
+    filter:blur(10px);
+    pointer-events:none;
+  }
+  .hero-glow.two{
+    top:auto;bottom:-460px;left:-380px;right:auto;
+    width:900px;height:900px;
+    background:radial-gradient(circle, rgba(233,200,147,0.10) 0%, transparent 64%);
+  }
+  .hero-eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:13px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;margin-bottom:30px;
+    opacity:0;animation:rise .9s .1s forwards;
+  }
+  .hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+  h1.hero-title{
+    font-family:var(--serif);
+    font-weight:300;
+    font-size:clamp(2.6rem,6.4vw,5.4rem);
+    line-height:1.02;
+    letter-spacing:-0.018em;
+    max-width:16ch;
+    margin-bottom:30px;
+  }
+  h1.hero-title .em{font-style:italic;color:var(--blue)}
+  h1.hero-title span{display:inline-block;opacity:0;animation:rise 1s forwards}
+  .hero-sub{
+    font-size:clamp(1.05rem,2vw,1.32rem);
+    color:var(--ink2);max-width:54ch;line-height:1.55;font-weight:400;
+    opacity:0;animation:rise 1s .75s forwards;
+  }
+  .hero-actions{
+    display:flex;gap:16px;flex-wrap:wrap;margin-top:42px;
+    opacity:0;animation:rise 1s .95s forwards;
+  }
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:15px 28px;border-radius:100px;
+    font-family:var(--sans);font-size:15.5px;font-weight:600;letter-spacing:.01em;
+    cursor:pointer;transition:all .28s cubic-bezier(.2,.7,.3,1);border:1px solid transparent;
+  }
+  .btn-primary{background:var(--gold);color:#1b1206}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 38px -12px rgba(233,200,147,.6)}
+  .btn-ghost{border-color:var(--line2);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+  .btn svg{width:17px;height:17px}
 
-    /* ─── SCREENS ─── */
-    .screen {
-      display: none;
-      flex: 1;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    .screen.active { display: flex; flex-direction: column; }
+  .hero-stat{
+    display:flex;gap:42px;margin-top:74px;flex-wrap:wrap;
+    opacity:0;animation:rise 1s 1.15s forwards;
+  }
+  .hero-stat .s{max-width:230px}
+  .hero-stat .s .n{font-family:var(--serif);font-size:2.5rem;font-weight:400;color:var(--ink);line-height:1;margin-bottom:9px}
+  .hero-stat .s .n em{font-style:italic;color:var(--gold)}
+  .hero-stat .s .l{font-size:13.5px;color:var(--ink3);line-height:1.4}
 
-    /* ─── HOME SCREEN ─── */
-    .home-header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 20px 14px;
-    }
+  @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 
-    /* ── LOGO PLACEHOLDER ──
-       Replace .logo-placeholder with:
-       <img src="icons/icon-192.png" class="logo-img" alt="AWARE NJ Logo" />
-       and add CSS: .logo-img { width: 84px; height: 84px; border-radius: 50%; }
-    */
-    .logo-placeholder {
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      background: rgba(99,179,237,0.1);
-      border: 2px dashed rgba(99,179,237,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 14px;
-      flex-shrink: 0;
-    }
+  /* ── section scaffolding ── */
+  section{position:relative;padding:108px 0;z-index:2}
+  .sec-label{
+    font-size:12.5px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--blue-deep);font-weight:700;margin-bottom:22px;
+    display:flex;align-items:center;gap:13px;
+  }
+  .sec-label::before{content:'';width:34px;height:1px;background:var(--blue-deep);opacity:.6}
+  h2.sec-title{
+    font-family:var(--serif);font-weight:300;
+    font-size:clamp(2rem,4.4vw,3.4rem);line-height:1.08;letter-spacing:-0.015em;
+    max-width:20ch;margin-bottom:26px;
+  }
+  h2.sec-title .em{font-style:italic;color:var(--blue)}
+  .sec-lead{font-size:1.18rem;color:var(--ink2);max-width:60ch;line-height:1.6}
 
-    .logo-placeholder svg {
-      width: 48px;
-      height: 48px;
-    }
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+  .reveal.in{opacity:1;transform:none}
 
-    .app-title {
-      font-size: 25px;
-      font-weight: 800;
-      color: var(--text);
-      letter-spacing: 0.08em;
-      text-align: center;
-    }
+  /* ── THE MOMENT (problem) ── */
+  .moment{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
+  .moment-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:64px}
+  @media(max-width:860px){.moment-grid{grid-template-columns:1fr}}
+  .moment-card{
+    border:1px solid var(--line);border-radius:18px;padding:38px 34px;
+    background:rgba(255,255,255,0.012);position:relative;overflow:hidden;
+  }
+  .moment-card.then{border-left:3px solid var(--red)}
+  .moment-card.now{border-left:3px solid var(--green)}
+  .moment-card .tag{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;margin-bottom:18px}
+  .moment-card.then .tag{color:var(--red)}
+  .moment-card.now .tag{color:var(--green)}
+  .moment-card h3{font-family:var(--serif);font-weight:400;font-size:1.7rem;line-height:1.22;margin-bottom:16px}
+  .moment-card p{color:var(--ink2);font-size:1.02rem;line-height:1.62}
+  .moment-card .seq{margin-top:22px;display:flex;flex-direction:column;gap:11px}
+  .moment-card .seq .step{display:flex;gap:13px;align-items:flex-start;font-size:.96rem;color:var(--ink2)}
+  .moment-card .seq .step .ico{flex-shrink:0;width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;margin-top:1px;font-size:13px;font-weight:700}
+  .moment-card.then .ico{background:rgba(232,100,92,.13);color:var(--red)}
+  .moment-card.now .ico{background:rgba(127,216,164,.13);color:var(--green)}
 
-    .app-state {
-      font-size: 11px;
-      color: var(--blue);
-      letter-spacing: 0.18em;
-      font-weight: 600;
-      margin-top: 3px;
-      text-align: center;
-      text-transform: uppercase;
-    }
+  /* ── pull / definition ── */
+  .define{background:var(--bg2);text-align:center}
+  .define .wrap{max-width:920px}
+  .define-q{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(1.7rem,3.6vw,2.7rem);line-height:1.32;letter-spacing:-0.01em}
+  .define-q .hl{color:var(--gold);font-style:normal;font-weight:400}
+  .define-body{margin-top:34px;font-size:1.12rem;color:var(--ink2);max-width:62ch;margin-left:auto;margin-right:auto;line-height:1.66}
+  .define-num{
+    display:inline-block;font-family:var(--serif);font-size:.95rem;color:var(--blue);
+    letter-spacing:.04em;margin-top:40px;padding:9px 20px;border:1px solid var(--line2);border-radius:100px;
+  }
+  .define-num b{color:var(--ink);font-weight:600}
 
-    .app-subtitle {
-      font-size: 13px;
-      color: var(--text3);
-      margin-top: 7px;
-      text-align: center;
-      line-height: 1.4;
-    }
+  /* ── what it does ── */
+  .does{background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 60%)}
+  .does-layout{display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:center;margin-top:30px}
+  @media(max-width:900px){.does-layout{grid-template-columns:1fr;gap:54px}}
+  .feature{padding:28px 0;border-top:1px solid var(--line);display:flex;gap:22px}
+  .feature:last-child{border-bottom:1px solid var(--line)}
+  .feature .fn{font-family:var(--serif);font-size:1.5rem;color:var(--ink4);font-weight:400;flex-shrink:0;width:42px;line-height:1.3}
+  .feature h3{font-size:1.16rem;font-weight:600;margin-bottom:8px;letter-spacing:.01em}
+  .feature p{color:var(--ink3);font-size:1rem;line-height:1.56}
+  .feature .q{margin-top:13px;font-family:var(--serif);font-style:italic;color:var(--blue);font-size:1.04rem;line-height:1.45;padding-left:16px;border-left:2px solid rgba(127,192,242,.35)}
 
-    /* ─── NAV CARDS ─── */
-    .nav-cards {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      padding: 0 14px 14px;
-    }
+  /* phone mock */
+  .phone{
+    position:relative;margin:0 auto;
+    width:285px;height:585px;border-radius:42px;
+    background:linear-gradient(160deg,#1a2c40,#0c1827);
+    border:1px solid var(--line2);
+    box-shadow:0 50px 90px -30px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.06);
+    padding:13px;
+  }
+  .phone::before{content:'';position:absolute;top:13px;left:50%;transform:translateX(-50%);width:108px;height:26px;background:var(--bg);border-radius:0 0 16px 16px;z-index:4}
+  .phone-screen{width:100%;height:100%;border-radius:31px;background:var(--bg);overflow:hidden;position:relative;display:flex;flex-direction:column}
+  .ps-head{padding:38px 22px 14px;text-align:center}
+  .ps-logo{width:58px;height:58px;border-radius:50%;margin:0 auto 11px}
+  .ps-title{font-family:var(--serif);font-size:20px;letter-spacing:.12em;font-weight:600}
+  .ps-state{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);font-weight:700;margin-top:3px}
+  .ps-sub{font-size:10px;color:var(--ink3);margin-top:7px;line-height:1.3}
+  .ps-cards{padding:8px 14px;display:flex;flex-direction:column;gap:7px;flex:1}
+  .ps-card{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:11px 12px;display:flex;align-items:center;gap:11px}
+  .ps-ico{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .ps-ico svg{width:17px;height:17px}
+  .ps-ct{flex:1}
+  .ps-ct .t{font-size:13px;font-weight:600;color:var(--ink)}
+  .ps-ct .s{font-size:9.5px;color:var(--ink3);margin-top:1px}
+  .ps-arrow{color:var(--ink4)}
+  .ps-arrow svg{width:13px;height:13px}
 
-    .nav-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 13px 15px;
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      cursor: pointer;
-      width: 100%;
-      text-align: left;
-      transition: opacity 0.15s;
-    }
-    .nav-card:active { opacity: 0.7; }
+  /* ── the three questions feature band ── */
+  .threeq{background:var(--bg);position:relative}
+  .threeq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:60px}
+  @media(max-width:860px){.threeq-grid{grid-template-columns:1fr}}
+  .qcard{
+    border:1px solid var(--line);border-radius:18px;padding:34px 30px;
+    background:rgba(242,180,99,0.02);position:relative;transition:border-color .35s,transform .35s;
+  }
+  .qcard:hover{border-color:rgba(242,180,99,.4);transform:translateY(-4px)}
+  .qcard .qn{font-family:var(--serif);font-size:.92rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:20px}
+  .qcard .qt{font-family:var(--serif);font-weight:400;font-size:1.32rem;line-height:1.32;color:var(--ink);margin-bottom:16px}
+  .qcard .qh{font-size:.95rem;color:var(--ink3);line-height:1.55}
 
-    .nav-card-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
+  /* ── voices (testimony) ── */
+  .voices{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
+  .voices-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:62px}
+  @media(max-width:860px){.voices-grid{grid-template-columns:1fr}}
+  .voice{
+    border:1px solid var(--line);border-radius:20px;padding:40px 38px;
+    background:rgba(255,255,255,0.014);position:relative;
+  }
+  .voice .mark{font-family:var(--serif);font-size:4.5rem;line-height:.6;color:var(--blue);opacity:.28;height:34px}
+  .voice blockquote{font-family:var(--serif);font-weight:300;font-style:italic;font-size:1.42rem;line-height:1.42;color:var(--ink);margin:16px 0 26px;letter-spacing:-0.005em}
+  .voice .who{display:flex;align-items:center;gap:14px;padding-top:22px;border-top:1px solid var(--line)}
+  .voice .who .av{width:46px;height:46px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.15rem;color:var(--blue);font-weight:500;flex-shrink:0;border:1px solid var(--line2)}
+  .voice .who .nm{font-weight:600;font-size:1rem}
+  .voice .who .rl{font-size:.86rem;color:var(--ink3);line-height:1.35;margin-top:2px}
 
-    .nav-card-icon svg { width: 23px; height: 23px; }
+  .stakes{
+    margin-top:24px;border:1px solid rgba(232,100,92,.28);border-radius:18px;
+    padding:32px 36px;background:rgba(232,100,92,.045);
+    display:flex;gap:24px;align-items:flex-start;
+  }
+  @media(max-width:620px){.stakes{flex-direction:column;gap:14px}}
+  .stakes .si{flex-shrink:0;width:46px;height:46px;border-radius:12px;background:rgba(232,100,92,.13);display:flex;align-items:center;justify-content:center}
+  .stakes .si svg{width:22px;height:22px;color:var(--red)}
+  .stakes h3{font-family:var(--serif);font-weight:400;font-size:1.3rem;margin-bottom:8px}
+  .stakes p{color:var(--ink2);font-size:1rem;line-height:1.58}
 
-    .nav-card-icon.blue { background: rgba(99,179,237,0.12); }
-    .nav-card-icon.red  { background: rgba(229,62,62,0.12); }
-    .nav-card-icon.amber{ background: rgba(245,158,11,0.12); }
-    .nav-card-icon.green{ background: rgba(104,211,145,0.12); }
+  /* ── audiences ── */
+  .who-for{background:var(--bg2)}
+  .aud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:58px}
+  @media(max-width:900px){.aud-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.aud-grid{grid-template-columns:1fr}}
+  .aud{border:1px solid var(--line);border-radius:16px;padding:28px 24px;transition:background .3s,border-color .3s}
+  .aud:hover{background:rgba(255,255,255,.02);border-color:var(--line2)}
+  .aud .ai{width:40px;height:40px;border-radius:11px;background:var(--surface);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+  .aud .ai svg{width:20px;height:20px;color:var(--blue)}
+  .aud h3{font-size:1.06rem;font-weight:600;margin-bottom:7px}
+  .aud p{font-size:.92rem;color:var(--ink3);line-height:1.5}
 
-    .nav-card-text { flex: 1; }
-    .nav-card-title { font-size: 17px; font-weight: 600; color: var(--text); }
-    .nav-card-sub   { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  /* ── why now ── */
+  .why{background:linear-gradient(180deg,var(--bg2),var(--bg))}
+  .why-list{margin-top:56px;display:flex;flex-direction:column}
+  .why-row{display:grid;grid-template-columns:auto 1fr;gap:40px;padding:34px 0;border-top:1px solid var(--line);align-items:start}
+  .why-row:last-child{border-bottom:1px solid var(--line)}
+  @media(max-width:720px){.why-row{grid-template-columns:1fr;gap:14px}}
+  .why-row .wy{font-family:var(--serif);font-size:1.05rem;color:var(--gold);font-weight:500;letter-spacing:.04em;white-space:nowrap}
+  .why-row .wd h3{font-family:var(--serif);font-weight:400;font-size:1.5rem;line-height:1.25;margin-bottom:12px}
+  .why-row .wd p{color:var(--ink2);font-size:1.04rem;line-height:1.6;max-width:64ch}
+  .why-row .wd .src{font-size:.84rem;color:var(--ink4);margin-top:10px;letter-spacing:.02em}
 
-    .nav-card-arrow { flex-shrink: 0; }
-    .nav-card-arrow svg { width: 16px; height: 16px; color: var(--text4); }
+  /* ── proof / app real ── */
+  .proof{background:var(--bg);text-align:center}
+  .proof .wrap{max-width:840px}
+  .proof h2{font-family:var(--serif);font-weight:300;font-size:clamp(2rem,4.6vw,3.4rem);line-height:1.12;letter-spacing:-0.015em}
+  .proof h2 .em{font-style:italic;color:var(--blue)}
+  .proof p{font-size:1.18rem;color:var(--ink2);margin:28px auto 0;max-width:60ch;line-height:1.62}
+  .proof .pbtn{margin-top:44px}
 
-    .home-footer {
-      text-align: center;
-      padding: 0 20px 11px;
-      font-size: 11px;
-      color: #1E3A5F;
-      letter-spacing: 0.06em;
-    }
+  /* ── invite / collaborate ── */
+  .invite{background:linear-gradient(180deg,var(--bg),var(--bg2));border-top:1px solid var(--line)}
+  .invite-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:58px}
+  @media(max-width:860px){.invite-grid{grid-template-columns:1fr}}
+  .inv{border:1px solid var(--line);border-radius:18px;padding:34px 30px;background:rgba(255,255,255,.012);transition:transform .3s,border-color .3s}
+  .inv:hover{transform:translateY(-4px);border-color:var(--line2)}
+  .inv .it{font-family:var(--serif);font-size:1.3rem;font-weight:400;margin-bottom:13px}
+  .inv .it .em{font-style:italic;color:var(--blue)}
+  .inv p{color:var(--ink3);font-size:.98rem;line-height:1.56;margin-bottom:20px}
+  .inv a.lk{font-size:.92rem;font-weight:600;color:var(--gold);letter-spacing:.03em;display:inline-flex;align-items:center;gap:7px;transition:gap .25s}
+  .inv a.lk:hover{gap:12px}
+  .inv a.lk svg{width:14px;height:14px}
 
-    /* ─── INNER SCREEN HEADER ─── */
-    .inner-header {
-      background: var(--bg);
-      padding: 11px 16px 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+  /* ── final cta ── */
+  .final{background:var(--bg2);text-align:center;padding:128px 0}
+  .final .wrap{max-width:780px}
+  .final .sec-label{justify-content:center}
+  .final .sec-label::before{display:none}
+  .final h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.08;letter-spacing:-0.02em}
+  .final h2 .em{font-style:italic;color:var(--gold)}
+  .final p{font-size:1.16rem;color:var(--ink2);margin:26px auto 0;max-width:54ch;line-height:1.6}
+  .final-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:42px}
 
-    .back-btn {
-      background: rgba(255,255,255,0.06);
-      border: none;
-      border-radius: 50%;
-      width: 34px;
-      height: 34px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-    .back-btn svg { width: 18px; height: 18px; color: #718096; }
+  /* ── footer ── */
+  footer{background:var(--bg);border-top:1px solid var(--line);padding:56px 0 40px}
+  .foot-top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap}
+  .foot-brand{display:flex;align-items:center;gap:13px;font-family:var(--serif);font-size:19px;letter-spacing:.1em;font-weight:600}
+  .foot-brand img{width:40px;height:40px;border-radius:50%}
+  .foot-tag{color:var(--ink3);font-size:.95rem;margin-top:14px;max-width:34ch;line-height:1.5}
+  .foot-cols{display:flex;gap:64px;flex-wrap:wrap}
+  .foot-col h4{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink4);font-weight:700;margin-bottom:16px}
+  .foot-col a,.foot-col span{display:block;color:var(--ink2);font-size:.95rem;margin-bottom:10px;transition:color .2s}
+  .foot-col a:hover{color:var(--blue)}
+  .foot-bot{margin-top:48px;padding-top:26px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;font-size:.82rem;color:var(--ink4)}
+  .foot-bot a{color:var(--ink3)}
+  .foot-bot a:hover{color:var(--blue)}
 
-    .inner-title { font-size: 17px; font-weight: 600; color: var(--text); }
-
-    /* ─── INNER CONTENT ─── */
-    .inner-content { padding: 13px 16px 18px; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-
-    .section-label {
-      font-size: 13px;
-      color: var(--text3);
-      line-height: 1.5;
-      margin-bottom: 11px;
-    }
-
-    /* ─── SIGNS SCREEN ─── */
-    .sign-row {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 11px 13px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      margin-bottom: 8px;
-      transition: border-color 0.15s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .sign-check {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 1.5px solid var(--text4);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.15s;
-    }
-
-    .sign-check.checked {
-      background: var(--blue);
-      border-color: var(--blue);
-    }
-
-    .sign-check svg { width: 13px; height: 13px; color: var(--bg); }
-
-    .sign-text { font-size: 14px; color: var(--text2); line-height: 1.4; }
-
-    .alert-box {
-      display: none;
-      background: rgba(229,62,62,0.1);
-      border: 1px solid rgba(229,62,62,0.28);
-      border-radius: 14px;
-      padding: 14px 15px;
-      margin-top: 2px;
-      margin-bottom: 14px;
-    }
-
-    .alert-box.visible { display: block; }
-
-    .alert-title { font-size: 13px; font-weight: 600; color: var(--red); margin-bottom: 4px; }
-    .alert-body  { font-size: 13px; color: #718096; line-height: 1.4; }
-
-    .alert-cta {
-      margin-top: 10px;
-      background: var(--red);
-      border: none;
-      border-radius: 10px;
-      padding: 10px 16px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #fff;
-      cursor: pointer;
-      width: 100%;
-      font-family: var(--font);
-    }
-
-    .misuse-section { margin-top: 16px; }
-    .misuse-label {
-      font-size: 11px;
-      color: var(--text4);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 9px;
-    }
-
-    .tag-row { display: flex; flex-wrap: wrap; gap: 7px; }
-
-    .tag {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 20px;
-      padding: 5px 11px;
-      font-size: 12px;
-      color: var(--text3);
-    }
-
-    /* ─── PROTOCOL SCREEN ─── */
-    .protocol-card {
-      background: var(--surface);
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 16px;
-      padding: 14px 16px;
-      margin-bottom: 10px;
-    }
-
-    .protocol-card.step1 { border-left: 4px solid var(--red); }
-    .protocol-card.step2 { border-left: 4px solid var(--blue); }
-    .protocol-card.step3 { border-left: 4px solid var(--amber); }
-
-    .protocol-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .step-badge {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .step-badge.red   { background: var(--red);   color: #fff; }
-    .step-badge.blue  { background: var(--blue);  color: var(--bg); }
-    .step-badge.amber { background: var(--amber); color: var(--bg); }
-
-    .step-title { font-size: 18px; font-weight: 700; color: var(--text); letter-spacing: 0.05em; }
-
-    .step-body {
-      font-size: 14px;
-      color: #718096;
-      line-height: 1.55;
-      padding-left: 38px;
-    }
-
-    .step-cta {
-      margin-top: 10px;
-      margin-left: 38px;
-      background: rgba(245,158,11,0.1);
-      border: 1px solid rgba(245,158,11,0.25);
-      border-radius: 10px;
-      padding: 8px 14px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--amber);
-      cursor: pointer;
-      font-family: var(--font);
-    }
-
-    /* ─── QUESTIONS SCREEN ─── */
-    .question-card {
-      background: var(--surface);
-      border: 1px solid rgba(245,158,11,0.18);
-      border-radius: 16px;
-      padding: 13px 15px;
-      margin-bottom: 9px;
-    }
-
-    .q-label {
-      font-size: 11px;
-      color: var(--amber);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-weight: 600;
-      margin-bottom: 7px;
-    }
-
-    .q-text {
-      font-size: 16px;
-      color: #E8EDF5;
-      line-height: 1.5;
-      font-weight: 500;
-    }
-
-    .q-hint {
-      margin-top: 7px;
-      font-size: 12px;
-      color: var(--text3);
-      line-height: 1.4;
-    }
-
-    .er-note {
-      background: rgba(99,179,237,0.06);
-      border: 1px solid rgba(99,179,237,0.14);
-      border-radius: 11px;
-      padding: 9px 12px;
-    }
-
-    .er-note-title { font-size: 11px; color: var(--blue); font-weight: 600; margin-bottom: 3px; }
-    .er-note-body  { font-size: 12px; color: var(--text3); line-height: 1.4; }
-    .er-note-code  { color: #A0AEC0; font-weight: 600; }
-
-    /* ─── REFERENCE SCREEN ─── */
-    .ref-card {
-      background: var(--surface);
-      border: 1px solid rgba(255,255,255,0.05);
-      border-radius: 15px;
-      padding: 12px 14px;
-      margin-bottom: 8px;
-    }
-
-    .ref-label {
-      font-size: 11px;
-      color: var(--text3);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 7px;
-    }
-
-    .z-code { font-size: 26px; font-weight: 700; color: var(--blue); font-family: 'Courier New', monospace; letter-spacing: 0.04em; }
-    .z-name { font-size: 14px; color: var(--text2); margin-top: 3px; }
-    .z-note { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 12px; color: var(--text3); line-height: 1.4; }
-
-    .term-row {
-      padding: 7px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .term-row:last-child { border-bottom: none; }
-    .term-name { font-size: 13px; color: #FC8181; }
-    .term-flag { font-size: 10px; color: var(--text4); }
-
-    .contact-block { margin-bottom: 9px; }
-    .contact-block:last-child { margin-bottom: 0; }
-    .contact-block + .contact-block { padding-top: 9px; border-top: 1px solid rgba(255,255,255,0.04); }
-
-    .contact-name  { font-size: 13px; font-weight: 600; color: var(--text2); }
-    .contact-email { font-size: 12px; color: var(--blue); margin-top: 2px; }
-    .contact-org   { font-size: 10px; color: var(--text3); margin-top: 1px; }
-
-    .coalition-badge {
-      background: rgba(99,179,237,0.04);
-      border: 1px solid rgba(99,179,237,0.1);
-      border-radius: 12px;
-      padding: 9px 13px;
-      text-align: center;
-      font-size: 10px;
-      color: var(--text4);
-      line-height: 1.4;
-      margin-bottom: 0;
-    }
-
-    /* ─── BOTTOM NAV ─── */
-    .bottom-nav {
-      height: 56px;
-      padding-bottom: env(safe-area-inset-bottom, 0);
-      background: var(--bg);
-      border-top: 1px solid rgba(255,255,255,0.05);
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      flex-shrink: 0;
-    }
-
-    .nav-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 6px 10px;
-      min-width: 58px;
-      font-family: var(--font);
-    }
-
-    .nav-btn svg { width: 22px; height: 22px; }
-    .nav-btn span { font-size: 10px; font-weight: 500; }
-
-    .nav-btn.active svg, .nav-btn.active span { color: var(--blue); }
-    .nav-btn:not(.active) svg, .nav-btn:not(.active) span { color: #2D3748; }
-  </style>
+  .disclaimer{margin-top:20px;font-size:.8rem;color:var(--ink4);line-height:1.5;max-width:78ch}
+</style>
 </head>
 <body>
 
-<div id="app">
-  <div class="status-bar"></div>
-
-  <!-- ═══════════════════════════════
-       SCREEN: HOME
-  ═══════════════════════════════ -->
-  <div id="screen-home" class="screen active">
-
-    <div class="home-header">
-
-      <!--
-        ╔══════════════════════════════════════════════════╗
-        ║  LOGO PLACEHOLDER — REPLACE IN CLAUDE CODE      ║
-        ║  1. Add logo PNG to /public/icons/logo.png       ║
-        ║  2. Delete the <div class="logo-placeholder">    ║
-        ║  3. Replace with:                                ║
-        ║     <img src="icons/logo.png"                    ║
-        ║          alt="AWARE NJ"                          ║
-        ║          style="width:84px;height:84px;          ║
-        ║                 border-radius:50%;               ║
-        ║                 margin-bottom:14px;"  />         ║
-        ╚══════════════════════════════════════════════════╝
-      -->
-<img src="icons/logo.png" alt="AWARE NJ" style="width:74px;height:74px;border-radius:50%;margin-bottom:10px;" />
-
-      <div class="app-title">A.W.A.R.E.</div>
-      <div class="app-state">New Jersey</div>
-      <div class="app-subtitle">Spiritual Emergency First Responder Reference</div>
-    </div>
-
-    <div class="nav-cards">
-
-      <button class="nav-card" onclick="nav('signs')">
-        <div class="nav-card-icon blue">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#63B3ED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-          </svg>
-        </div>
-        <div class="nav-card-text">
-          <div class="nav-card-title">Am I Seeing This?</div>
-          <div class="nav-card-sub">Signs to recognize</div>
-        </div>
-        <div class="nav-card-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 18 15 12 9 6"/>
-          </svg>
-        </div>
-      </button>
-
-      <button class="nav-card" onclick="nav('protocol')" style="border-color:rgba(229,62,62,0.15);">
-        <div class="nav-card-icon red">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#E53E3E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
-            <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
-          </svg>
-        </div>
-        <div class="nav-card-text">
-          <div class="nav-card-title">What Do I Do?</div>
-          <div class="nav-card-sub">De-escalate · Listen · Ask</div>
-        </div>
-        <div class="nav-card-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 18 15 12 9 6"/>
-          </svg>
-        </div>
-      </button>
-
-      <button class="nav-card" onclick="nav('questions')">
-        <div class="nav-card-icon amber">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          </svg>
-        </div>
-        <div class="nav-card-text">
-          <div class="nav-card-title">What Do I Ask?</div>
-          <div class="nav-card-sub">The 3 key questions</div>
-        </div>
-        <div class="nav-card-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 18 15 12 9 6"/>
-          </svg>
-        </div>
-      </button>
-
-      <button class="nav-card" onclick="nav('reference')">
-        <div class="nav-card-icon green">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#68D391" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-          </svg>
-        </div>
-        <div class="nav-card-text">
-          <div class="nav-card-title">Quick Reference</div>
-          <div class="nav-card-sub">Z Code · terminology · contacts</div>
-        </div>
-        <div class="nav-card-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 18 15 12 9 6"/>
-          </svg>
-        </div>
-      </button>
-
-    </div>
-
-    <div class="home-footer">NJ Coalition of Religious, Spiritual and Mental Health Leaders</div>
+<!-- NAV -->
+<nav id="nav">
+  <a href="#top" class="nav-brand">
+    <img src="logo.png" alt="AWARE NJ logo" />
+    <span>A.W.A.R.E.<b></b></span>
+  </a>
+  <div class="nav-links">
+    <a href="#what">The App</a>
+    <a href="#define">Spiritual Emergency</a>
+    <a href="#voices">From the Field</a>
+    <a href="#why">Why Now</a>
+    <a href="https://awarenj.health" target="_blank" rel="noopener" class="nav-cta">Open the App ↗</a>
   </div>
+</nav>
 
-  <!-- ═══════════════════════════════
-       SCREEN: SIGNS
-  ═══════════════════════════════ -->
-  <div id="screen-signs" class="screen">
-    <div class="inner-header">
-      <button class="back-btn" onclick="nav('home')" aria-label="Back">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
-      </button>
-      <div class="inner-title">Am I Seeing This?</div>
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-glow"></div>
+  <div class="hero-glow two"></div>
+  <div class="wrap">
+    <span class="hero-eyebrow"><span class="dot"></span>Are We Aware of Religious Experiences? — New Jersey</span>
+    <h1 class="hero-title">
+      <span style="animation-delay:.2s">A person in crisis</span>
+      <span style="animation-delay:.34s">is speaking about God.</span><br>
+      <span class="em" style="animation-delay:.5s">The next sixty seconds</span>
+      <span style="animation-delay:.62s">decide everything.</span>
+    </h1>
+    <p class="hero-sub">A.W.A.R.E. NJ puts a framework in the first responder's pocket — to recognize when a crisis is spiritual, ask three questions instead of reaching for restraints, and route a human being toward care instead of trauma.</p>
+    <div class="hero-actions">
+      <a href="https://awarenj.health" target="_blank" rel="noopener" class="btn btn-primary">
+        See the live app
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="#define" class="btn btn-ghost">What is a spiritual emergency?</a>
     </div>
+    <div class="hero-stat">
+      <div class="s"><div class="n"><em>49%</em></div><div class="l">of American adults report a spiritual or mystical experience. A share end up misdiagnosed and hospitalized.</div></div>
+      <div class="s"><div class="n">~18,000</div><div class="l">ARRIVE Together crisis responses in NJ since 2021 — none with a spiritual-emergency protocol.</div></div>
+      <div class="s"><div class="n">8M+</div><div class="l">988 contacts in 2025. Not one carried a trained spiritual-emergency question.</div></div>
+    </div>
+  </div>
+</header>
 
-    <div class="inner-content">
-      <p class="section-label">Tap signs you observe. Two or more may indicate a Spiritual Emergency.</p>
-
-      <div class="sign-row" onclick="toggleSign(this)">
-        <div class="sign-check" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+<!-- THE MOMENT -->
+<section class="moment" id="moment">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-label">The encounter</div>
+      <h2 class="sec-title">The same call. <span class="em">Two endings.</span></h2>
+      <p class="sec-lead">When someone in crisis is praying, hearing a voice, or describing an encounter with the sacred, the system that meets them first usually has no framework for what it's seeing. So it defaults to the only script it knows.</p>
+    </div>
+    <div class="moment-grid">
+      <div class="moment-card then reveal">
+        <div class="tag">Without a framework</div>
+        <h3>Spiritual content is read as a symptom.</h3>
+        <p>The behavior gets labeled hyper-religiosity, fanaticism, or "out of touch with reality." The encounter escalates because no one knows it doesn't have to.</p>
+        <div class="seq">
+          <div class="step"><span class="ico">1</span> Religious language is logged as delusion</div>
+          <div class="step"><span class="ico">2</span> Involuntary hold; restraints; the ER</div>
+          <div class="step"><span class="ico">3</span> $10,000–$30,000 per stay — and lasting trauma</div>
+          <div class="step"><span class="ico">4</span> A natural, often positive experience is pathologized</div>
         </div>
-        <div class="sign-text">Ecstatic mood or very elevated energy</div>
       </div>
-
-      <div class="sign-row" onclick="toggleSign(this)">
-        <div class="sign-check" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="sign-text">Very quiet or withdrawn</div>
-      </div>
-
-      <div class="sign-row" onclick="toggleSign(this)">
-        <div class="sign-check" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="sign-text">Hearing voices or seeing visions</div>
-      </div>
-
-      <div class="sign-row" onclick="toggleSign(this)">
-        <div class="sign-check" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="sign-text">Unusual ideas linked to mythology or religion</div>
-      </div>
-
-      <div class="sign-row" onclick="toggleSign(this)">
-        <div class="sign-check" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <div class="sign-text">Perceptual alterations — altered sensory experience</div>
-      </div>
-
-      <div id="signs-alert" class="alert-box">
-        <div class="alert-title">Possible Spiritual Emergency</div>
-        <div class="alert-body">Do not dismiss spiritual content. Proceed to protocol.</div>
-        <button class="alert-cta" onclick="nav('protocol')">See Protocol →</button>
-      </div>
-
-      <div class="misuse-section">
-        <div class="misuse-label">Often mislabeled as:</div>
-        <div class="tag-row">
-          <span class="tag">Hyper-religiosity</span>
-          <span class="tag">Religious preoccupation</span>
-          <span class="tag">Religious fanaticism</span>
-          <span class="tag">Out of touch with reality</span>
+      <div class="moment-card now reveal">
+        <div class="tag">With A.W.A.R.E.</div>
+        <h3>The responder recognizes what they're seeing.</h3>
+        <p>They de-escalate, listen without judgment, and ask three vetted questions. The spiritual dimension becomes a clinical data point — not a trigger for force.</p>
+        <div class="seq">
+          <div class="step"><span class="ico">1</span> Calm, lower the stimulus, create space</div>
+          <div class="step"><span class="ico">2</span> Ask the three questions — no diagnosing</div>
+          <div class="step"><span class="ico">3</span> Offer clergy or a peer-support specialist</div>
+          <div class="step"><span class="ico">4</span> Note <b style="color:var(--green)">Z65.8</b> in the record for a proper handoff</div>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- ═══════════════════════════════
-       SCREEN: PROTOCOL
-  ═══════════════════════════════ -->
-  <div id="screen-protocol" class="screen">
-    <div class="inner-header">
-      <button class="back-btn" onclick="nav('home')" aria-label="Back">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
-      </button>
-      <div class="inner-title">What Do I Do?</div>
+<!-- DEFINE -->
+<section class="define" id="define">
+  <div class="wrap reveal">
+    <div class="sec-label" style="justify-content:center"><span></span></div>
+    <p class="define-q">A <span class="hl">spiritual emergency</span> is a profound encounter with the sacred — a mystical state, an awakening, a crisis of meaning — intense enough to overwhelm a person, yet not, in itself, a mental illness.</p>
+    <p class="define-body">These states are real. They are well-documented across every tradition — Christian ecstasy, Jewish mystical experience, meditation-induced states in Hindu and Buddhist practice. They are actively sought and deeply valued. And they are among the experiences most likely to be misread as psychiatric emergency by a first responder who has no framework for understanding them.</p>
+    <span class="define-num">DSM-5-TR · ICD-10 code <b>Z65.8</b> — Moral, Religious or Spiritual Problem</span>
+  </div>
+</section>
+
+<!-- WHAT IT DOES -->
+<section class="does" id="what">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-label">The tool</div>
+      <h2 class="sec-title">A reference that fits <span class="em">in a shift, in a pocket.</span></h2>
+      <p class="sec-lead">A.W.A.R.E. NJ is a live, installable mobile app — no app store required, works offline. Built from a pocket card refined over years of orientations with first responders across New Jersey and the country.</p>
     </div>
-
-    <div class="inner-content">
-
-      <div class="protocol-card step1">
-        <div class="protocol-header">
-          <div class="step-badge red">1</div>
-          <div class="step-title">DE-ESCALATE</div>
+    <div class="does-layout">
+      <div class="reveal">
+        <div class="feature">
+          <div class="fn">01</div>
+          <div><h3>Recognize the signs</h3><p>An at-a-glance reference for the behaviors a responder might see — ecstatic or withdrawn states, voices or visions, religious or mythological themes, an altered sense of reality — and the labels these are too often mistaken for.</p></div>
         </div>
-        <div class="step-body">Lower your voice. Slow your pace. Create calm space. Reduce sirens, bright lights, and crowds where possible.</div>
-      </div>
-
-      <div class="protocol-card step2">
-        <div class="protocol-header">
-          <div class="step-badge blue">2</div>
-          <div class="step-title">LISTEN</div>
+        <div class="feature">
+          <div class="fn">02</div>
+          <div><h3>Know what to do</h3><p>A three-step field protocol: <b>de-escalate, listen without judgment, ask.</b> Lower the voice, slow the pace, reduce sirens and lights. Never dismiss the spiritual content.</p></div>
         </div>
-        <div class="step-body">Without judgment. Do not dismiss or challenge spiritual content. Be fully present. Let them speak.</div>
-      </div>
-
-      <div class="protocol-card step3">
-        <div class="protocol-header">
-          <div class="step-badge amber">3</div>
-          <div class="step-title">ASK</div>
+        <div class="feature">
+          <div class="fn">03</div>
+          <div><h3>Ask the right questions</h3><p>Three vetted, non-diagnostic questions that open a door instead of forcing one.</p>
+          <div class="q">"Do you sense something religious or spiritual is occurring?"</div></div>
         </div>
-        <div class="step-body">Ask the 3 key questions calmly and without judgment.</div>
-        <button class="step-cta" onclick="nav('questions')">See the 3 Questions →</button>
+        <div class="feature">
+          <div class="fn">04</div>
+          <div><h3>Document for a real handoff</h3><p>One reference to the <b>Z65.8</b> code. Noted in the record, it follows the person to the ER or intake — so receiving staff flag for a chaplain or peer specialist instead of starting from zero.</p></div>
+        </div>
+        <div class="feature">
+          <div class="fn">05</div>
+          <div><h3>Ask the AI guide — hands-free</h3><p>An embedded assistant, grounded in the AWARE protocol, that a responder can talk to on the way to a call. Calm, specific, mission-aligned — and it never replaces their training or their safety.</p></div>
+        </div>
       </div>
-
+      <div class="reveal">
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="ps-head">
+              <img src="logo.png" class="ps-logo" alt="" />
+              <div class="ps-title">A.W.A.R.E.</div>
+              <div class="ps-state">New Jersey</div>
+              <div class="ps-sub">Spiritual Emergency First Responder Reference</div>
+            </div>
+            <div class="ps-cards">
+              <div class="ps-card">
+                <div class="ps-ico" style="background:rgba(127,192,242,.12)"><svg viewBox="0 0 24 24" fill="none" stroke="#7FC0F2" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+                <div class="ps-ct"><div class="t">Am I Seeing This?</div><div class="s">Signs to recognize</div></div>
+                <div class="ps-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+              </div>
+              <div class="ps-card">
+                <div class="ps-ico" style="background:rgba(232,100,92,.12)"><svg viewBox="0 0 24 24" fill="none" stroke="#E8645C" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
+                <div class="ps-ct"><div class="t">What Do I Do?</div><div class="s">De-escalate · Listen · Ask</div></div>
+                <div class="ps-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+              </div>
+              <div class="ps-card">
+                <div class="ps-ico" style="background:rgba(242,180,99,.12)"><svg viewBox="0 0 24 24" fill="none" stroke="#F2B463" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+                <div class="ps-ct"><div class="t">What Do I Ask?</div><div class="s">The 3 key questions</div></div>
+                <div class="ps-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+              </div>
+              <div class="ps-card">
+                <div class="ps-ico" style="background:rgba(127,216,164,.12)"><svg viewBox="0 0 24 24" fill="none" stroke="#7FD8A4" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+                <div class="ps-ct"><div class="t">Quick Reference</div><div class="s">Z65.8 · terminology · contacts</div></div>
+                <div class="ps-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+              </div>
+              <div class="ps-card">
+                <div class="ps-ico" style="background:rgba(183,148,244,.14)"><svg viewBox="0 0 24 24" fill="none" stroke="#B794F4" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M9 8V5M15 8V5"/></svg></div>
+                <div class="ps-ct"><div class="t">AI Guide</div><div class="s">Ask the AWARE NJ assistant</div></div>
+                <div class="ps-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- ═══════════════════════════════
-       SCREEN: QUESTIONS
-  ═══════════════════════════════ -->
-  <div id="screen-questions" class="screen">
-    <div class="inner-header">
-      <button class="back-btn" onclick="nav('home')" aria-label="Back">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
-      </button>
-      <div class="inner-title">What Do I Ask?</div>
+<!-- THREE QUESTIONS -->
+<section class="threeq" id="questions">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-label">The intervention</div>
+      <h2 class="sec-title">Three questions. <span class="em">No diagnosis required.</span></h2>
+      <p class="sec-lead">We are not asking first responders to diagnose. We are asking them to observe behavior, ask three questions, and flag the record. Clinicians can barely make these distinctions — responders don't have to. They just have to open the door.</p>
     </div>
-
-    <div class="inner-content">
-      <p class="section-label">Ask these 3 questions calmly, without judgment.</p>
-
-      <div class="question-card">
-        <div class="q-label">Question 1</div>
-        <div class="q-text">"Do you sense something religious or spiritual is occurring?"</div>
-        <div class="q-hint">Opens the door. Validates their experience without diagnosing.</div>
+    <div class="threeq-grid">
+      <div class="qcard reveal">
+        <div class="qn">Question One</div>
+        <div class="qt">"Do you sense something religious or spiritual is occurring?"</div>
+        <div class="qh">Opens the door. Validates the person's experience without labeling or diagnosing it.</div>
       </div>
-
-      <div class="question-card">
-        <div class="q-label">Question 2</div>
-        <div class="q-text">"Would you like a clergy member to be called for support?"</div>
-        <div class="q-hint">Respects their tradition. Bridges to appropriate spiritual care.</div>
+      <div class="qcard reveal" style="transition-delay:.08s">
+        <div class="qn">Question Two</div>
+        <div class="qt">"Would you like a clergy member to be called for support?"</div>
+        <div class="qh">Respects their tradition. Bridges to appropriate, trusted spiritual care in the moment.</div>
       </div>
-
-      <div class="question-card">
-        <div class="q-label">Question 3</div>
-        <div class="q-text">"Would a peer-support specialist familiar with your religious, spiritual, or cultural traditions be beneficial?"</div>
-        <div class="q-hint">Connects to culturally competent care.</div>
+      <div class="qcard reveal" style="transition-delay:.16s">
+        <div class="qn">Question Three</div>
+        <div class="qt">"Would a peer-support specialist familiar with your traditions help?"</div>
+        <div class="qh">Connects to culturally competent care — and a path that isn't the back of a car.</div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- ═══════════════════════════════
-       SCREEN: REFERENCE
-  ═══════════════════════════════ -->
-  <div id="screen-reference" class="screen">
-    <div class="inner-header">
-      <button class="back-btn" onclick="nav('home')" aria-label="Back">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
-      </button>
-      <div class="inner-title">Quick Reference</div>
+<!-- VOICES -->
+<section class="voices" id="voices">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-label">From the field</div>
+      <h2 class="sec-title">The officers who lived it <span class="em">had never seen anything like it.</span></h2>
+      <p class="sec-lead">Two veteran law enforcement officers — one a national crisis-response authority, one a former patrol officer — reviewed the app independently. Their words, unprompted.</p>
+    </div>
+    <div class="voices-grid">
+      <div class="voice reveal">
+        <div class="mark">"</div>
+        <blockquote>I've never seen anything like that before. This would have been nice to have, to be honest with you, on duty.</blockquote>
+        <p style="color:var(--ink2);font-size:1rem;line-height:1.55;margin-bottom:6px">"It's hard to find that fine line between what is absolute paranoia and somebody truly experiencing this. A lot of officers miss that — and if they miss the chance to use a resource, it could compromise the patient."</p>
+        <div class="who">
+          <div class="av">ES</div>
+          <div><div class="nm">Ernie Stevens</div><div class="rl">Founder, San Antonio PD Mental Health Unit · Council of State Governments Justice Center</div></div>
+        </div>
+      </div>
+      <div class="voice reveal" style="transition-delay:.1s">
+        <div class="mark">"</div>
+        <blockquote>I wish I would have known to ask that during my career. I asked the typical de-escalation questions — but not the spiritual-specific.</blockquote>
+        <p style="color:var(--ink2);font-size:1rem;line-height:1.55;margin-bottom:6px">"Looking back, there were so many times I just didn't know what to say. Had I had that app with those questions, it probably would've been a game changer."</p>
+        <div class="who">
+          <div class="av">SM</div>
+          <div><div class="nm">Scott Medlin</div><div class="rl">Former police officer · law enforcement podcast host</div></div>
+        </div>
+      </div>
     </div>
 
-    <div class="inner-content">
-
-      <div class="ref-card">
-        <div class="ref-label">DSM Z Code</div>
-        <div class="z-code">Z65.8</div>
-        <div class="z-name">Moral, Religious or Spiritual Problem</div>
-        <div class="z-note">APA Board &amp; DSM Steering Committee approved definition, December 2024. Use this code in ER documentation.</div>
+    <div class="stakes reveal">
+      <div class="si"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+      <div>
+        <h3>Why the stakes are this high</h3>
+        <p>In the case both officers point to as the clearest example of a missed spiritual emergency, a woman in crisis asked for her Bible. The red flags were there. They were missed — with a tragic, irreversible outcome. A framework in that moment is the difference between an encounter and a catastrophe.</p>
       </div>
-
-      <div class="ref-card">
-        <div class="ref-label">Terms Often Misapplied</div>
-        <div class="term-row"><span class="term-name">Hyper-religiosity</span><span class="term-flag">misapplied</span></div>
-        <div class="term-row"><span class="term-name">Religious preoccupation</span><span class="term-flag">misapplied</span></div>
-        <div class="term-row"><span class="term-name">Religious fanaticism</span><span class="term-flag">misapplied</span></div>
-        <div class="term-row" style="border-bottom:none;"><span class="term-name">Out of touch with reality</span><span class="term-flag">misapplied</span></div>
-      </div>
-
-      <div class="ref-card">
-        <div class="ref-label">A.W.A.R.E. NJ Contacts</div>
-        <div class="contact-block">
-          <div class="contact-name">Janet Werner</div>
-          <div class="contact-email">JanetWerner@UHaveMyWord.com</div>
-          <div class="contact-org">A.W.A.R.E. · U Have My Word</div>
-        </div>
-        <div class="contact-block">
-          <div class="contact-name">Calvin Chatlos MD</div>
-          <div class="contact-email">humanfaith@optimum.org</div>
-          <div class="contact-org">humanfaithproject.org</div>
-        </div>
-      </div>
-
     </div>
   </div>
+</section>
 
-  <!-- ═══════════════════════════════
-       BOTTOM NAV
-  ═══════════════════════════════ -->
-  <nav class="bottom-nav" aria-label="Main navigation">
+<!-- WHO IT'S FOR -->
+<section class="who-for" id="audiences">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-label">Who it serves</div>
+      <h2 class="sec-title">Built for the people who <span class="em">arrive first.</span></h2>
+      <p class="sec-lead">Conceived for patrol officers — but the people who encounter spiritual crisis first are a wider circle, and many are already oriented toward compassionate response.</p>
+    </div>
+    <div class="aud-grid">
+      <div class="aud reveal">
+        <div class="ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3>Law Enforcement & CIT</h3>
+        <p>Officers and crisis-intervention teams who need a fast, in-field reference for a situation training never covered.</p>
+      </div>
+      <div class="aud reveal" style="transition-delay:.06s">
+        <div class="ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <h3>988 & Crisis Lines</h3>
+        <p>Dispatchers, screeners, and mobile crisis teams — a smaller behavior change for staff already trained to listen.</p>
+      </div>
+      <div class="aud reveal" style="transition-delay:.12s">
+        <div class="ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg></div>
+        <h3>ER & Stabilization</h3>
+        <p>Intake and emergency staff who receive the handoff — the Z65.8 flag tells them where to start.</p>
+      </div>
+      <div class="aud reveal" style="transition-delay:.18s">
+        <div class="ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg></div>
+        <h3>Chaplains & Clergy</h3>
+        <p>Multi-faith chaplains and clergy — already on payroll, already trained to be present — ready to be called in.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <button class="nav-btn active" id="nav-home" onclick="nav('home')" aria-label="Home">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
-      </svg>
-      <span>Home</span>
-    </button>
+<!-- WHY NOW -->
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-label">The moment</div>
+      <h2 class="sec-title">A.W.A.R.E. NJ is not ahead of its time. <span class="em">It is exactly on time.</span></h2>
+      <p class="sec-lead">The policy environment, the funding environment, and the field itself have converged on the premise this work was built on.</p>
+    </div>
+    <div class="why-list">
+      <div class="why-row reveal">
+        <div class="wy">Federal recognition</div>
+        <div class="wd">
+          <h3>Mental health is being named, at the highest level, as having a spiritual dimension.</h3>
+          <p>A new White House Faith Office invites faith-based and community organizations to compete for federal health funding — and a major federal faith-and-health initiative has put real dollars behind the premise that recovery has a spiritual component.</p>
+          <div class="src">Source: federal policy announcements, 2025–2026</div>
+        </div>
+      </div>
+      <div class="why-row reveal">
+        <div class="wy">The 988 gap</div>
+        <div class="wd">
+          <h3>Eight million people reached 988 in 2025. Not one call carried a spiritual-emergency protocol.</h3>
+          <p>Congress appropriated $520M for 988 in FY2025, with a further $231M opportunity announced in 2026. The crisis-response infrastructure is being built right now — and the spiritual dimension is simply missing from it.</p>
+          <div class="src">Source: SAMHSA appropriations, 2025–2026</div>
+        </div>
+      </div>
+      <div class="why-row reveal">
+        <div class="wy">The clinical code</div>
+        <div class="wd">
+          <h3>The diagnostic language already exists — and was just expanded.</h3>
+          <p>Z65.8 — Moral, Religious or Spiritual Problem — is a legitimate ICD-10 code, expanded in the DSM-5-TR to formally recognize that this distress can be clinically meaningful <em>without</em> being a mental illness. AWARE simply puts it in the responder's hand.</p>
+          <div class="src">Source: DSM-5-TR · ICD-10-CM</div>
+        </div>
+      </div>
+      <div class="why-row reveal">
+        <div class="wy">The proof</div>
+        <div class="wd">
+          <h3>It already exists. You can hold it tonight.</h3>
+          <p>Most applicants describe something theoretical. We can hand someone a phone — a live, installable, AI-powered, voice-capable app, built and deployed from a pocket card. The concept is no longer a concept.</p>
+          <div class="src">Live at awarenj.health</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <button class="nav-btn" id="nav-signs" onclick="nav('signs')" aria-label="Signs">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
-      </svg>
-      <span>Signs</span>
-    </button>
+<!-- PROOF -->
+<section class="proof" id="proof">
+  <div class="wrap reveal">
+    <h2>This is not a pitch deck. <span class="em">It's a working tool.</span></h2>
+    <p>Open it on a phone. Tap through the protocol. Ask the AI guide a question in the field and get a calm, grounded answer in seconds. That is the demo. That is the proof.</p>
+    <div class="pbtn">
+      <a href="https://awarenj.health" target="_blank" rel="noopener" class="btn btn-primary">
+        Open the live app
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
 
-    <button class="nav-btn" id="nav-protocol" onclick="nav('protocol')" aria-label="Protocol">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
-        <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
-      </svg>
-      <span>Protocol</span>
-    </button>
+<!-- INVITE / COLLABORATE -->
+<section class="invite" id="join">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="sec-label">Stand with us</div>
+      <h2 class="sec-title">One tool. <span class="em">Four reasons to care.</span></h2>
+      <p class="sec-lead">A.W.A.R.E. NJ sits at an intersection most initiatives never reach — and every angle is genuine, not a stretch.</p>
+    </div>
+    <div class="invite-grid">
+      <div class="inv reveal">
+        <div class="it"><span class="em">Funders</span> & foundations</div>
+        <p>Law enforcement wellness, behavioral-health crisis reform, religious and interfaith equity, and healthcare-cost reduction — four non-overlapping funding stories pointing at the same tool.</p>
+        <a class="lk" href="#contact">Start a conversation <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="inv reveal" style="transition-delay:.08s">
+        <div class="it"><span class="em">Ambassadors</span> & advocates</div>
+        <p>Officers, chaplains, clinicians, and lived-experience voices who know firsthand why this matters — and can carry it into the rooms we can't reach alone.</p>
+        <a class="lk" href="#contact">Become an ambassador <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+      <div class="inv reveal" style="transition-delay:.16s">
+        <div class="it"><span class="em">Departments</span> & partners</div>
+        <p>CIT programs, hospital systems, 988 centers, and academic partners ready to pilot, train, and measure what changes when responders are equipped for this.</p>
+        <a class="lk" href="#contact">Explore a pilot <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <button class="nav-btn" id="nav-questions" onclick="nav('questions')" aria-label="Ask">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-      </svg>
-      <span>Ask</span>
-    </button>
+<!-- FINAL CTA -->
+<section class="final" id="contact">
+  <div class="wrap reveal">
+    <div class="sec-label">The next conversation</div>
+    <h2>A person having a genuine encounter with the sacred deserves to be met with <span class="em">understanding — not force.</span></h2>
+    <p>The question is no longer whether this is needed. It's how fast we move, and who we build it with.</p>
+    <div class="final-actions">
+      <a href="mailto:JanetWerner@UHaveMyWord.com?subject=A.W.A.R.E.%20NJ%20—%20Let's%20talk" class="btn btn-primary">
+        Get in touch
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+      <a href="https://awarenj.health" target="_blank" rel="noopener" class="btn btn-ghost">See the app</a>
+    </div>
+  </div>
+</section>
 
-    <button class="nav-btn" id="nav-reference" onclick="nav('reference')" aria-label="Reference">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-      </svg>
-      <span>Reference</span>
-    </button>
-
-  </nav>
-</div>
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand"><img src="logo.png" alt="" /> A.W.A.R.E.</div>
+        <div class="foot-tag">Are We Aware of Religious Experiences? — New Jersey. A spiritual emergency first responder reference.</div>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4>The App</h4>
+          <a href="https://awarenj.health" target="_blank" rel="noopener">Open the app ↗</a>
+          <a href="#what">What it does</a>
+          <a href="#questions">The three questions</a>
+          <a href="#define">Spiritual emergency</a>
+        </div>
+        <div class="foot-col">
+          <h4>Connect</h4>
+          <a href="mailto:JanetWerner@UHaveMyWord.com">Janet Werner</a>
+          <a href="https://uhavemyword.com/a-w-a-r-e/" target="_blank" rel="noopener">U Have My Word ↗</a>
+          <a href="#join">Partner with us</a>
+          <a href="#contact">Get in touch</a>
+        </div>
+      </div>
+    </div>
+    <p class="disclaimer">A.W.A.R.E. NJ is a first-responder reference tool grounded in the lived experience of spiritual emergency and informed by the NJ Coalition of Religious, Spiritual and Mental Health Leaders. It is not a substitute for emergency services, medical, psychological, or legal advice. In an emergency, always follow your department protocol and call 911.</p>
+    <div class="foot-bot">
+      <span>© 2026 U Have My Word LLC. All rights reserved. A.W.A.R.E.™ is a trademark owned by U Have My Word LLC.</span>
+      <span>NJ Coalition of Religious, Spiritual and Mental Health Leaders</span>
+    </div>
+  </div>
+</footer>
 
 <script>
-  // ─── NAVIGATION ───
-  var SCREENS = ['home','signs','protocol','questions','reference'];
-  var NAV_COLORS = {
-    home:     '#63B3ED',
-    signs:    '#63B3ED',
-    protocol: '#E53E3E',
-    questions:'#F59E0B',
-    reference:'#68D391'
-  };
-
-  function nav(id) {
-    SCREENS.forEach(function(s) {
-      var screen = document.getElementById('screen-' + s);
-      var btn    = document.getElementById('nav-' + s);
-      if (screen) screen.classList.toggle('active', s === id);
-      if (btn) {
-        btn.classList.toggle('active', s === id);
-        btn.style.color = (s === id) ? NAV_COLORS[s] : '#2D3748';
-      }
-    });
-    // scroll inner content to top
-    var activeScreen = document.getElementById('screen-' + id);
-    if (activeScreen) activeScreen.scrollTop = 0;
-  }
-
-  // ─── SIGN TOGGLE ───
-  var signCount = 0;
-
-  function toggleSign(row) {
-    var check = row.querySelector('.sign-check');
-    var on = row.getAttribute('data-on') === '1';
-
-    if (on) {
-      row.setAttribute('data-on', '0');
-      row.style.borderColor = 'rgba(255,255,255,0.07)';
-      check.classList.remove('checked');
-      signCount = Math.max(0, signCount - 1);
-    } else {
-      row.setAttribute('data-on', '1');
-      row.style.borderColor = 'rgba(99,179,237,0.3)';
-      check.classList.add('checked');
-      signCount++;
-    }
-
-    document.getElementById('signs-alert').classList.toggle('visible', signCount >= 2);
-  }
-
-  // ─── PWA SERVICE WORKER ───
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(function() {});
-  }
+  // nav scroll state
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>30),{passive:true});
+  // reveal on scroll
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
-
 </body>
 </html>
