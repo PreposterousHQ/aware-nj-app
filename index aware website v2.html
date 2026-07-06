@@ -157,6 +157,11 @@
 
   /* ── Audience ── */
   .aud-copy{max-width:64ch;margin-top:6px}
+  .aud-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:24px}
+  .aud-card{background:#fff;border:1px solid var(--line);border-top:4px solid var(--navy);border-radius:10px;padding:22px 22px 24px}
+  .aud-card h4{font-family:var(--serif);font-weight:700;color:var(--ink);font-size:17px;margin-bottom:10px;line-height:1.2}
+  .aud-card p{font-size:15px;color:var(--body);line-height:1.55}
+  .aud-card .code{font-family:var(--serif);font-weight:800;color:var(--red)}
 
   /* ── Training ── */
   .tier{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px 30px;margin-top:20px;display:flex;gap:24px}
@@ -219,11 +224,13 @@
     nav.links.open a{padding:12px 0;border-bottom:1px solid var(--line);width:100%}
     .dyk-list,.voices,.q3,.fork,.refs,.reslists,.contact-grid{grid-template-columns:1fr}
     .feat{grid-template-columns:1fr 1fr}
+    .aud-grid{grid-template-columns:1fr 1fr}
   }
   @media(max-width:520px){
     section{padding:56px 0}
     .feat{grid-template-columns:1fr}
     .tier{flex-direction:column;gap:16px}
+    .aud-grid{grid-template-columns:1fr}
   }
   @media(prefers-reduced-motion:no-preference){
     .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
@@ -499,6 +506,24 @@
     <hr class="rule reveal" />
     <h2 class="reveal" style="font-size:clamp(26px,3.4vw,34px)">Built for the people who <span style="color:var(--red)">arrive first.</span></h2>
     <p class="aud-copy reveal">Conceived for patrol officers. But the people who encounter spiritual crisis first are a wider circle, and many are already oriented toward compassionate response.</p>
+    <div class="aud-grid">
+      <div class="aud-card reveal">
+        <h4>Law Enforcement &amp; CIT</h4>
+        <p>Officers and crisis-intervention teams who need a fast, in-field reference for a situation training never covered.</p>
+      </div>
+      <div class="aud-card reveal">
+        <h4>988 &amp; Crisis Lines</h4>
+        <p>Dispatchers, screeners, and mobile crisis teams, a smaller behavior change for staff already trained to listen.</p>
+      </div>
+      <div class="aud-card reveal">
+        <h4>ER &amp; Stabilization</h4>
+        <p>Intake and emergency staff who receive the handoff: the <span class="code">Z65.8</span> flag tells them where to start.</p>
+      </div>
+      <div class="aud-card reveal">
+        <h4>Chaplains &amp; Clergy</h4>
+        <p>Multi-faith chaplains and clergy, already on payroll, already trained to be present, ready to be called in.</p>
+      </div>
+    </div>
   </div>
 </section>
 
