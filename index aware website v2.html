@@ -139,6 +139,9 @@
   .qcard .qt{font-family:var(--serif);font-weight:700;color:var(--ink);font-size:19px;line-height:1.32}
   .qcard .qh{font-size:14px;color:var(--muted);margin-top:12px}
   .intro-copy{max-width:66ch;margin-top:6px}
+  .pad-followon{margin-top:26px}
+  .pad-followon .pad-prompt{font-family:var(--serif);font-weight:600;color:var(--ink);font-size:16px;margin-bottom:10px}
+  .pad-followon .pad-def{border-left:3px solid var(--navy);padding-left:14px;font-style:italic;color:var(--muted);font-size:14px;line-height:1.55}
 
   /* ── Without / With ── */
   .fork{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:14px}
@@ -385,7 +388,10 @@
         <div class="qh">Connects to culturally competent care, and a path that isn't the back of a car.</div>
       </div>
     </div>
-    <p class="app-note reveal">The responder might also ask: Do you have a Psychiatric Advance Directive (PAD)?</p>
+    <div class="pad-followon reveal">
+      <p class="pad-prompt">The responder might also ask: &ldquo;Do you have a Psychiatric Advance Directive (PAD)?&rdquo;</p>
+      <p class="pad-def">A PAD is a legal document in which a person states their mental-health treatment preferences in advance &mdash; who to contact, what care they want or refuse &mdash; for a time when they may be unable to speak for themselves.</p>
+    </div>
   </div>
 </section>
 
@@ -446,7 +452,7 @@
       <summary>
         <span style="display:flex;align-items:center;gap:20px;flex:1;min-width:0">
           <span class="lvl">2</span>
-          <span>Spiritual Emergency Assessment &amp; Care: Clinical Training</span>
+          <span>Spiritual Emergency Assessment &amp; Care:<br>Clinical Training</span>
         </span>
       </summary>
       <div class="acc-body">
@@ -459,7 +465,7 @@
       <summary>
         <span style="display:flex;align-items:center;gap:20px;flex:1;min-width:0">
           <span class="lvl">3</span>
-          <span>Clinical Training for Medical Staff</span>
+          <span>Spiritual Emergency Assessment &amp; Care:<br>Clinical Training for Medical Staff</span>
         </span>
       </summary>
       <div class="acc-body">
