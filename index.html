@@ -89,6 +89,8 @@
 
   /* ── Do You Know ── */
   .dyk-list{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:8px}
+  .dyk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
+  .dyk-grid details.acc{margin-bottom:0}
   .dyk{background:#fff;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;padding:24px 26px}
   .dyk.red{border-left-color:var(--red)}
   .dyk .q{font-family:var(--serif);font-weight:700;color:var(--red);font-size:15px;margin-bottom:10px;letter-spacing:0.02em}
@@ -207,6 +209,7 @@
   details.acc .acc-body .src{display:inline-block;margin-top:4px;font-size:13px;font-weight:600}
   details.acc .acc-body .fac{margin-top:12px;font-size:14.5px;color:var(--ink)}
   details.acc .acc-body .fac b{color:var(--navy)}
+  details.acc .acc-body .code{font-family:var(--serif);font-weight:800;color:var(--navy)}
 
   /* ── Transition band ── */
   .trans-quote{font-family:var(--serif);font-size:clamp(19px,2.6vw,28px);line-height:1.4;max-width:52ch;margin:0 auto;text-align:center;color:#E8ECF7}
@@ -241,6 +244,7 @@
     nav.links.open{display:flex;position:absolute;top:70px;left:0;right:0;background:#fff;flex-direction:column;gap:0;border-bottom:1px solid var(--line);padding:8px 24px 18px}
     nav.links.open a{padding:12px 0;border-bottom:1px solid var(--line);width:100%}
     .dyk-list,.voices,.q3,.fork,.refs,.reslists,.contact-grid{grid-template-columns:1fr}
+    .dyk-grid{grid-template-columns:1fr 1fr}
     .feat{grid-template-columns:1fr 1fr}
     .aud-grid{grid-template-columns:1fr 1fr}
   }
@@ -249,6 +253,7 @@
     .feat{grid-template-columns:1fr}
     .tier{flex-direction:column;gap:16px}
     .aud-grid{grid-template-columns:1fr}
+    .dyk-grid{grid-template-columns:1fr}
   }
   @media(prefers-reduced-motion:no-preference){
     .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
@@ -525,54 +530,54 @@
     <div class="eyebrow reveal">Do you know&hellip;</div>
     <hr class="rule reveal" />
 
-    <details class="acc reveal">
-      <summary>Do you know the DSM now includes &ldquo;Moral, Religious, or Spiritual Problem&rdquo;?</summary>
-      <div class="acc-body">
-        <p>&hellip;the American Psychiatric Association Board &amp; DSM Steering Committee approved definition for Religious or Spiritual Problem <b>(V62.89)</b> as of December 2024 includes the term <b>MORAL</b>? DSM-5-TR Updates take effect October 1, 2025. Revised text: <span class="code">Z65.8</span> Moral, Religious, or Spiritual Problem: this category may be used when the focus of clinical attention is a moral, religious, or spiritual problem.</p>
-      </div>
-    </details>
+    <div class="dyk-grid">
 
-    <details class="acc reveal">
-      <summary>Do you know 45% of American adults report a spiritual or mystical experience?</summary>
-      <div class="acc-body">
-        <h3>45% of American adults</h3>
-        <p>&hellip;report a spiritual or mystical experience. A share end up misdiagnosed and hospitalized.</p>
-        <a class="src" href="https://www.pewresearch.org/religion/2023/12/07/spiritual-experiences/" target="_blank" rel="noopener">Pew Research Center &nearr;</a>
-      </div>
-    </details>
+      <details class="acc reveal">
+        <summary>Do you know the DSM now includes &ldquo;Moral, Religious, or Spiritual Problem&rdquo;?</summary>
+        <div class="acc-body">
+          <p>In December 2024 the APA Board &amp; DSM Steering Committee added the term <em>moral</em> to the existing Religious or Spiritual Problem code (<span class="code">V62.89</span>). Effective October 1, 2025, the DSM-5-TR revised text reads <span class="code">Z65.8</span> &mdash; Moral, Religious, or Spiritual Problem: used when the focus of clinical attention is a moral, religious, or spiritual problem.</p>
+        </div>
+      </details>
 
-    <details class="acc reveal">
-      <summary>Do you know first responders already notice this in the field?</summary>
-      <div class="acc-body">
-        <h3>First responders notice</h3>
-        <p>&hellip;many first responders do notice behaviors of a religious or spiritual nature in crisis calls.</p>
-        <a class="src" href="https://www.youtube.com/watch?v=i_1U8Oo9NCc" target="_blank" rel="noopener">Ernest Stevens speaking &nearr;</a>
-      </div>
-    </details>
+      <details class="acc reveal">
+        <summary>Do you know 45% of American adults report a spiritual or mystical experience?</summary>
+        <div class="acc-body">
+          <p>And a share of them end up misdiagnosed and hospitalized.</p>
+          <a class="src" href="https://www.pewresearch.org/religion/2023/12/07/spiritual-experiences/" target="_blank" rel="noopener">Pew Research Center &nearr;</a>
+        </div>
+      </details>
 
-    <details class="acc reveal">
-      <summary>Do you know psychedelics can induce a spiritual experience?</summary>
-      <div class="acc-body">
-        <h3>Psychedelics</h3>
-        <p>&hellip;can induce a profound religious or spiritual experience.</p>
-      </div>
-    </details>
+      <details class="acc reveal">
+        <summary>Do you know first responders already notice this in the field?</summary>
+        <div class="acc-body">
+          <p>Many first responders do observe behaviors of a religious or spiritual nature on crisis calls.</p>
+          <a class="src" href="https://www.youtube.com/watch?v=i_1U8Oo9NCc" target="_blank" rel="noopener">Ernest Stevens speaking &nearr;</a>
+        </div>
+      </details>
 
-    <details class="acc reveal">
-      <summary>Do you know about MCORT in New Jersey?</summary>
-      <div class="acc-body">
-        <h3>MCORT in New Jersey</h3>
-        <p>&hellip;988 Mobile Crisis Outreach Response Teams (MCORTs) respond to non-life-threatening mental health, substance use, and suicidal crises. MCORTs are currently only available in New Jersey (two-person field teams that respond without involving law enforcement when safe).</p>
-        <a class="src" href="https://www.nj.gov/humanservices/news/pressreleases/2025/approved/20250417.shtml" target="_blank" rel="noopener">NJ Dept. of Human Services &nearr;</a>
-      </div>
-    </details>
+      <details class="acc reveal">
+        <summary>Do you know psychedelics can trigger a spiritual experience?</summary>
+        <div class="acc-body">
+          <p>They can induce profound religious or mystical states.</p>
+        </div>
+      </details>
 
-    <details class="acc reveal">
-      <summary>Do you know family and friends can respond too?</summary>
-      <div class="acc-body">
-        <p>&hellip;all first responders (including family &amp; friends) can provide an honoring response to religious or spiritual experiences.</p>
-      </div>
-    </details>
+      <details class="acc reveal">
+        <summary>Do you know about MCORT in New Jersey?</summary>
+        <div class="acc-body">
+          <p>&hellip;988 Mobile Crisis Outreach Response Teams (MCORTs) respond to non-life-threatening mental health, substance use, and suicidal crises. MCORTs are currently only available in New Jersey (two-person field teams that respond without involving law enforcement when safe).</p>
+          <a class="src" href="https://www.nj.gov/humanservices/news/pressreleases/2025/approved/20250417.shtml" target="_blank" rel="noopener">NJ Dept. of Human Services &nearr;</a>
+        </div>
+      </details>
+
+      <details class="acc reveal">
+        <summary>Do you know family and friends can respond too?</summary>
+        <div class="acc-body">
+          <p>Anyone who arrives first &mdash; including family and friends &mdash; can offer an honoring response to a religious or spiritual experience.</p>
+        </div>
+      </details>
+
+    </div>
 
   </div>
 </section>
