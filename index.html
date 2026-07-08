@@ -81,7 +81,8 @@
   .hero h1 .a{color:var(--red)}
   .hero p.lead{font-size:clamp(18px,2.2vw,22px);color:var(--body);max-width:60ch;margin-top:24px;line-height:1.5}
   .hero .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
-  .hero-img{display:block;max-width:560px;width:100%;margin:34px auto 0;border-radius:10px}
+  .hero-inner{display:grid;grid-template-columns:1.2fr 0.8fr;gap:52px;align-items:center}
+  .hero-img{display:block;max-width:100%;width:100%;border-radius:10px;object-fit:contain}
   .btn{display:inline-block;padding:13px 22px;border-radius:7px;font-family:var(--sans);font-weight:700;font-size:15px;border:2px solid transparent;cursor:pointer}
   .btn-red{background:var(--red);color:#fff}
   .btn-red:hover{background:var(--red-deep);color:#fff}
@@ -184,7 +185,7 @@
   .cit-note{margin-top:14px;font-size:14.5px;color:var(--muted)}
   .help{margin-top:34px;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;padding:26px 30px}
   .help h3{font-size:20px;margin-bottom:8px}
-  .help-img{display:block;max-width:100%;width:100%;margin-top:16px;border-radius:10px}
+  .help-img{display:block;max-width:75%;width:100%;margin:16px auto 0;border-radius:10px}
   .pending{display:inline-block;font-family:var(--sans);font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--red);background:#fff;border:1px dashed var(--red);border-radius:5px;padding:3px 9px;margin-left:8px;vertical-align:middle}
 
   /* ── References / footnotes ── */
@@ -253,6 +254,8 @@
     .menu-btn{display:inline-block}
     nav.links.open{display:flex;position:absolute;top:70px;left:0;right:0;background:#fff;flex-direction:column;gap:0;border-bottom:1px solid var(--line);padding:8px 24px 18px}
     nav.links.open a{padding:12px 0;border-bottom:1px solid var(--line);width:100%}
+    .hero-inner{grid-template-columns:1fr}
+    .hero-img{max-width:400px;margin:28px auto 0}
     .dyk-list,.voices,.q3,.fork,.refs,.reslists,.contact-grid{grid-template-columns:1fr}
     .dyk-grid{grid-template-columns:1fr 1fr}
     .feat{grid-template-columns:1fr 1fr}
@@ -300,14 +303,18 @@
 <!-- ══ HERO ══ -->
 <section class="hero" id="top">
   <div class="wrap">
-    <div class="kicker">A first-responder framework for New Jersey</div>
-    <h1><span class="a">A</span>re <span class="a">W</span>e <span class="a">A</span>ware of <span class="a">R</span>eligious &amp; spiritual <span class="a">E</span>xperiences in mental health crisis care?</h1>
-    <p class="lead">The A.W.A.R.E. coalition puts a framework in the first responder's pocket: to recognize when a crisis is religious or spiritual, to ask beginning questions instead of reaching for restraints, and to route a human being toward care instead of trauma.</p>
-    <div class="cta-row">
-      <a href="#training" class="btn btn-red">Explore the training</a>
-      <a href="#emergency" class="btn btn-navy">What is a spiritual emergency?</a>
+    <div class="hero-inner">
+      <div>
+        <div class="kicker">A first-responder framework for New Jersey</div>
+        <h1><span class="a">A</span>re <span class="a">W</span>e <span class="a">A</span>ware of <span class="a">R</span>eligious &amp; spiritual <span class="a">E</span>xperiences in mental health crisis care?</h1>
+        <p class="lead">The A.W.A.R.E. coalition puts a framework in the first responder's pocket: to recognize when a crisis is religious or spiritual, to ask beginning questions instead of reaching for restraints, and to route a human being toward care instead of trauma.</p>
+        <div class="cta-row">
+          <a href="#training" class="btn btn-red">Explore the training</a>
+          <a href="#emergency" class="btn btn-navy">What is a spiritual emergency?</a>
+        </div>
+      </div>
+      <img class="hero-img reveal" src="nj-aware-tagline.png" alt="A.W.A.R.E. New Jersey" />
     </div>
-    <img class="hero-img reveal" src="nj-aware-tagline.png" alt="A.W.A.R.E. New Jersey" />
   </div>
 </section>
 
