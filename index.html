@@ -233,13 +233,13 @@
   .contact-card h4{font-size:17px;margin-bottom:6px}
   .contact-card .cname{font-family:var(--serif);font-weight:700;color:var(--ink);font-size:17px}
   .contact-card p{font-size:15px;margin-bottom:4px}
-  .contact-card a{font-weight:600}
+  .contact-card a{font-weight:600;overflow-wrap:break-word}
   .contact-links{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:14.5px}
   .contact-links a{display:block;margin-bottom:8px;font-weight:600}
   .contact-quote{font-family:var(--serif);font-size:clamp(17px,2vw,21px);line-height:1.55;color:#E8ECF7;border-left:3px solid var(--red);padding:14px 0 14px 22px;margin-top:28px}
   .contact-person{display:flex;align-items:center;gap:16px;margin-bottom:4px}
   .contact-person-img{width:68px;height:68px;object-fit:cover;border-radius:50%;flex-shrink:0}
-  .contact-person-info{flex:1}
+  .contact-person-info{flex:1;min-width:0}
 
   /* ── Footer ── */
   footer{background:#0F1730;color:#AEB8D4;padding:54px 0 40px;font-size:14px}
@@ -273,6 +273,8 @@
     .tier{flex-direction:column;gap:16px}
     .aud-grid{grid-template-columns:1fr}
     .dyk-grid{grid-template-columns:1fr}
+    .contact-card{padding:20px 18px}
+    .contact-person-img{width:52px;height:52px}
   }
   @media(prefers-reduced-motion:no-preference){
     .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
