@@ -27,7 +27,8 @@
     --sans:'Public Sans',system-ui,-apple-system,sans-serif;
     --wrap:1120px;
   }
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body{overflow-x:hidden}
   body{
     background:var(--white);
     color:var(--body);
@@ -258,9 +259,10 @@
     .menu-btn{display:inline-block}
     nav.links.open{display:flex;position:absolute;top:70px;left:0;right:0;background:#fff;flex-direction:column;gap:0;border-bottom:1px solid var(--line);padding:8px 24px 18px}
     nav.links.open a{padding:12px 0;border-bottom:1px solid var(--line);width:100%}
-    .hero-inner{grid-template-columns:1fr}
+    .hero-inner{grid-template-columns:1fr;gap:32px}
     .hero-img{max-width:400px;margin:28px auto 0}
     .dyk-list,.voices,.q3,.fork,.refs,.reslists,.contact-grid{grid-template-columns:1fr}
+    .hero-inner > *,.contact-grid > *{min-width:0}
     .dyk-grid{grid-template-columns:1fr 1fr}
     .feat{grid-template-columns:1fr 1fr}
     .aud-grid{grid-template-columns:1fr 1fr}
