@@ -92,8 +92,9 @@
 
   /* ── Do You Know ── */
   .dyk-list{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:8px}
-  .dyk-grid{display:flex;flex-wrap:wrap;gap:22px;margin-top:8px;justify-content:center}
-  .dyk-grid details.acc{flex:0 0 calc((100% - 66px) / 4);min-width:0;margin-bottom:0}
+  .dyk-grid{display:flex;flex-wrap:wrap;gap:22px;margin-top:8px;justify-content:center;align-items:stretch}
+  .dyk-grid details.acc{flex:0 0 calc((100% - 66px) / 4);min-width:0;margin-bottom:0;display:flex;flex-direction:column}
+  .dyk-grid details.acc > summary{flex:1;min-height:78px}
   .dyk{background:#fff;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;padding:24px 26px}
   .dyk.red{border-left-color:var(--red)}
   .dyk .q{font-family:var(--serif);font-weight:700;color:var(--red);font-size:15px;margin-bottom:10px;letter-spacing:0.02em}
@@ -622,7 +623,7 @@
       </details>
 
       <details class="acc reveal">
-        <summary>Do you know the Crisis Intervention Team Training (CIT) program is an innovative international police model that incorporates collaboration between the community&rsquo;s law enforcement system and mental health system&hellip;</summary>
+        <summary>Do you know CIT is an international police model for mental health crisis response?</summary>
         <div class="acc-body">
           <h3><a href="https://cit-nj.org/" target="_blank" rel="noopener">*CITNJ &nearr;</a></h3>
           <p>The Crisis Intervention Team (CIT-NJ) program is an innovative international police model that incorporates collaboration between the community&rsquo;s law enforcement system and mental health system to respond to the needs of those in psychiatric crisis. This partnership develops and sustains a 40-hour CIT certification program for its police departments and mental health providers in order to provide them with knowledge about mental illnesses, crisis resolution skills, and access to community-based services.</p>
