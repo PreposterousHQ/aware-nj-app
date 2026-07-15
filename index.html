@@ -92,8 +92,8 @@
 
   /* ── Do You Know ── */
   .dyk-list{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:8px}
-  .dyk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:8px}
-  .dyk-grid details.acc{margin-bottom:0}
+  .dyk-grid{display:flex;flex-wrap:wrap;gap:22px;margin-top:8px;justify-content:center}
+  .dyk-grid details.acc{flex:0 0 calc((100% - 66px) / 4);min-width:0;margin-bottom:0}
   .dyk{background:#fff;border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:10px;padding:24px 26px}
   .dyk.red{border-left-color:var(--red)}
   .dyk .q{font-family:var(--serif);font-weight:700;color:var(--red);font-size:15px;margin-bottom:10px;letter-spacing:0.02em}
@@ -253,6 +253,18 @@
   footer .legal{margin-top:18px;font-size:12.5px;color:#7E89AC}
   .pending-inline{color:#E4A6A9;font-style:italic}
 
+  /* ── Framework two-column intro ── */
+  .app-intro-row{display:grid;grid-template-columns:1fr minmax(0,340px);gap:36px;align-items:start}
+  .app-intro-row > *{min-width:0}
+  .app-intro-row .app-intro{max-width:none}
+  .pocket-card-img{max-width:100%;width:100%;border-radius:10px;object-fit:contain;display:block}
+  .pocket-card-caption{margin-top:10px;font-size:13px;color:var(--muted);text-align:center;line-height:1.5}
+
+  /* ── Intervention two-column intro ── */
+  .q-intro-row{display:grid;grid-template-columns:1fr minmax(0,320px);gap:36px;align-items:center;margin-bottom:28px}
+  .q-intro-row > *{min-width:0}
+  .q-intro-img{max-width:100%;width:100%;border-radius:10px;object-fit:contain;display:block}
+
   /* ── Responsive ── */
   @media(max-width:860px){
     nav.links{display:none}
@@ -263,7 +275,8 @@
     .hero-img{max-width:400px;margin:28px auto 0}
     .dyk-list,.voices,.q3,.fork,.refs,.reslists,.contact-grid{grid-template-columns:1fr}
     .hero-inner > *,.contact-grid > *{min-width:0}
-    .dyk-grid{grid-template-columns:1fr 1fr}
+    .app-intro-row,.q-intro-row{grid-template-columns:1fr}
+    .dyk-grid details.acc{flex:0 0 calc((100% - 22px) / 2)}
     .feat{grid-template-columns:1fr 1fr}
     .aud-grid{grid-template-columns:1fr 1fr}
   }
@@ -272,7 +285,7 @@
     .feat{grid-template-columns:1fr}
     .tier{flex-direction:column;gap:16px}
     .aud-grid{grid-template-columns:1fr}
-    .dyk-grid{grid-template-columns:1fr}
+    .dyk-grid details.acc{flex:0 0 100%}
     .contact-card{padding:20px 18px}
     .contact-person-img{width:52px;height:52px}
   }
@@ -338,10 +351,16 @@
   <div class="wrap">
     <div class="eyebrow reveal">The framework</div>
     <hr class="rule reveal" />
-    <div class="app-intro">
-      <p style="color:var(--muted);font-size:16px;margin-bottom:6px" class="reveal">Our orientation &amp; training programs, along with the A.W.A.R.E. APP, position first responders with</p>
-      <div class="big reveal">A reference that fits <em>in a shift, in a pocket.</em></div>
-      <p style="color:var(--body);max-width:70ch" class="reveal">A.W.A.R.E. App is a live prototype, installable mobile app, no app store required. Built from a pocket card refined over years of orientations with first responders across the United States.</p>
+    <div class="app-intro-row">
+      <div class="app-intro">
+        <p style="color:var(--muted);font-size:16px;margin-bottom:6px" class="reveal">Our orientation &amp; training programs, along with the A.W.A.R.E. APP, position first responders with</p>
+        <div class="big reveal">A reference that fits <em>in a shift, in a pocket.</em></div>
+        <p style="color:var(--body);max-width:70ch" class="reveal">A.W.A.R.E. App is a live prototype, installable mobile app, no app store required. Built from a pocket card refined over years of orientations with first responders across the United States.</p>
+      </div>
+      <div>
+        <img src="pocket-card-front.jpg" alt="A.W.A.R.E. pocket card for first responders" class="pocket-card-img reveal" />
+        <p class="pocket-card-caption reveal">Pocket cards previously introduced in CIT training in Monmouth County NJ can be purchased in bulk.</p>
+      </div>
     </div>
 
     <div class="feat reveal">
@@ -391,8 +410,13 @@
   <div class="wrap">
     <div class="eyebrow reveal">The intervention</div>
     <hr class="rule reveal" />
-    <h2 class="reveal" style="font-size:clamp(26px,3.4vw,34px)">Three questions. <span style="color:var(--red)">No diagnosis required.</span></h2>
-    <p class="intro-copy reveal">We are not asking first responders to diagnose. We are asking them to observe behavior, ask three questions, and flag the record. Clinicians can barely make these distinctions. Responders don't have to. They just have to open the door.</p>
+    <div class="q-intro-row">
+      <div>
+        <h2 class="reveal" style="font-size:clamp(26px,3.4vw,34px)">Three questions. <span style="color:var(--red)">No diagnosis required.</span></h2>
+        <p class="intro-copy reveal">We are not asking first responders to diagnose. We are asking them to observe behavior, ask three questions, and flag the record. Clinicians can barely make these distinctions. Responders don't have to. They just have to open the door.</p>
+      </div>
+      <img src="stop-pause-reflect.png" alt="Stop. Pause. Reflect." class="q-intro-img reveal" />
+    </div>
 
     <div class="q3">
       <div class="qcard reveal">
@@ -502,16 +526,6 @@
       <img class="help-img" src="help-model.jpg" alt="H.E.L.P. framework" />
     </div>
 
-    <div class="refs" style="margin-top:34px">
-      <div class="r reveal">
-        <h4><a href="https://cit-nj.org/" target="_blank" rel="noopener">*CITNJ &nearr;</a></h4>
-        <p>The Crisis Intervention Team (CIT-NJ) program is an innovative international police model that incorporates collaboration between the community's law enforcement system and mental health system to respond to the needs of those in psychiatric crisis. This partnership develops and sustains a 40-hour CIT certification program for its police departments and mental health providers in order to provide them with knowledge about mental illnesses, crisis resolution skills, and access to community-based services.</p>
-      </div>
-      <div class="r reveal">
-        <h4><a href="https://citinternational.org/" target="_blank" rel="noopener">*CIT International &nearr;</a></h4>
-        <p>CIT International, Inc. envisions a community where every person in a behavioral health crisis receives a compassionate response that promotes their well-being.</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -606,6 +620,16 @@
         <div class="acc-body">
           <p>Anyone who arrives first &mdash; including family and friends &mdash; can offer an honoring response to a religious or spiritual experience.</p>
           <p>Start with our <a href="#help-framework">H.E.L.P. framework</a> and see our <a href="#resources">Video resources</a> from A.W.A.R.E. NJ, USA &amp; Global</p>
+        </div>
+      </details>
+
+      <details class="acc reveal">
+        <summary>Do you know the Crisis Intervention Team Training (CIT) program is an innovative international police model that incorporates collaboration between the community&rsquo;s law enforcement system and mental health system&hellip;</summary>
+        <div class="acc-body">
+          <h3><a href="https://cit-nj.org/" target="_blank" rel="noopener">*CITNJ &nearr;</a></h3>
+          <p>The Crisis Intervention Team (CIT-NJ) program is an innovative international police model that incorporates collaboration between the community&rsquo;s law enforcement system and mental health system to respond to the needs of those in psychiatric crisis. This partnership develops and sustains a 40-hour CIT certification program for its police departments and mental health providers in order to provide them with knowledge about mental illnesses, crisis resolution skills, and access to community-based services.</p>
+          <h3 style="margin-top:16px"><a href="https://citinternational.org/" target="_blank" rel="noopener">*CIT International &nearr;</a></h3>
+          <p>CIT International, Inc. envisions a community where every person in a behavioral health crisis receives a compassionate response that promotes their well-being.</p>
         </div>
       </details>
 
